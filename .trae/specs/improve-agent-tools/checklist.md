@@ -1,0 +1,15 @@
+- [x] tools.py 中存在 CoreComponents 数据类，含 `vision: Vision | None` 字段
+- [x] create_robot_tools 函数签名包含 `core: CoreComponents | None = None` 参数且向后兼容
+- [x] detect_objects 在 simulation=False + vision 可用时调用 vision._check_obstacles 返回真实深度数据
+- [x] detect_objects 在 vision 不可用时返回明确降级消息（非空占位）
+- [x] detect_objects 在 simulation=True 时行为与原实现一致
+- [x] get_robot_status 在 simulation=False 时返回 bridge 连接信息（host:port + 状态）
+- [x] get_robot_status 在 simulation=True 时行为与原实现一致
+- [x] agent.py 使用 langgraph.prebuilt.create_react_agent 替代 langchain.agents.create_agent
+- [x] agent.py 正确复用 core.Chat 的模型配置约定（模型名 qwen3:8b、代理绕过）
+- [x] agent.py 的 SqliteSaver checkpoint 持久化功能正常
+- [x] agent.py 的 System Prompt 保持不变，正确传递给 agent
+- [x] agent.py CLI 参数完全兼容（--sim, --command, --bridge-host, --model, --thread-id, --db, --verbose）
+- [x] agent.py 新增 --vision 参数，默认关闭（避免无 RealSense 时报错）
+- [x] agent.py --sim 模式 + 交互对话能正常启动并执行 tool calling（语法检查通过，无诊断错误）
+- [x] 导入关系正确：tools.py 从 core.vision 导入 Vision（类型标注用 TYPE_CHECKING 避免循环）
